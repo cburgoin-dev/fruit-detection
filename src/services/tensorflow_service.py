@@ -4,13 +4,25 @@ import numpy as np
 import tensorflow as tf
 
 from config.settings import MODEL_PATH
-from config.class_names import CLASS_NAMES
+from config.class_names import (
+    CLASS_NAMES,
+    EXPECTED_CLASSES
+)
 
 
 class TensorflowService:
 
     def __init__(self):
         self.model = tf.keras.models.load_model(MODEL_PATH)
+
+        model_classes = self.model.output_shape[-1]
+
+        if model_classes != EXPECTED_CLASSES:
+            raise ValueError(
+                f"El modelo espera {model_classes} clases "
+                f"pero CLASS_NAMES tiene "
+                f"{EXPECTED_CLASSES}."
+            )
 
     def preprocess(self, frame):
 
@@ -47,5 +59,8 @@ class TensorflowService:
         )
 
         index = np.argmax(predictions)
+
+        if index >= len(CLASS_NAMES):
+            return "unknown"
 
         return CLASS_NAMES[index]

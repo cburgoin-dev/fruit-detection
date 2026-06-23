@@ -1,6 +1,9 @@
 import tkinter as tk
 from tkinter import ttk, messagebox, filedialog
-from PIL import Image, ImageTk
+from PIL import Image, ImageTk, ImageGrab
+import os
+import win32gui
+import ctypes
 
 import cv2
 import threading
@@ -88,6 +91,13 @@ class FruitWindow:
         self.create_sidebar()
         self.create_cart_panel()
 
+        self.screenshot_counter = 1
+
+        os.makedirs(
+            "screenshots/portfolio",
+            exist_ok=True
+        )
+
         if self.serial_service.connection:
 
             self.serial_thread = threading.Thread(
@@ -100,6 +110,11 @@ class FruitWindow:
         self.root.protocol(
             "WM_DELETE_WINDOW",
             self.on_closing
+        )
+
+        self.root.bind(
+            "<Control-Shift-S>",
+            self.save_portfolio_screenshot
         )
 
     def create_video_panel(self):
@@ -570,13 +585,33 @@ class FruitWindow:
 
     def update_demo_weight(self, *args):
 
-        gramos = int(
-            self.demo_weight.get()
-        )
+        gramos = int(self.demo_weight.get())
 
         self.demo_weight_label.config(
             text=f"Peso simulado: {gramos} g"
         )
+
+        # Solo actualizar si ya existe una fruta detectada
+        if self.last_detected_fruit:
+
+            weight_kg = gramos / 1000
+
+            price_kg = FRUIT_PRICES.get(
+                self.last_detected_fruit,
+                20.0
+            )
+
+            subtotal = weight_kg * price_kg
+
+            self.last_detected_weight = weight_kg
+            self.last_detected_price = subtotal
+
+            self.update_details(
+                self.last_detected_fruit,
+                weight_kg,
+                price_kg,
+                subtotal
+            )
 
     def load_image(self):
 
@@ -816,6 +851,44 @@ class FruitWindow:
         self.total_var.set(
             f"TOTAL: ${total:.2f}"
         )
+
+    def save_portfolio_screenshot(self, event=None):
+        """
+        Guarda una captura exacta de la ventana principal.
+        Se activa con Ctrl + Shift + S.
+        """
+
+        self.root.update()
+
+        hwnd = self.root.winfo_id()
+
+        left, top, right, bottom = win32gui.GetWindowRect(hwnd)
+
+        scale = ctypes.windll.shcore.GetScaleFactorForDevice(0) / 100
+
+        TITLE_BAR = int(28 * scale)
+        LEFT_OFFSET = int(2 * scale)
+        RIGHT_OFFSET = int(1 * scale)
+
+        left = int(left * scale) + LEFT_OFFSET
+        top = int(top * scale) - TITLE_BAR
+        right = int(right * scale) - RIGHT_OFFSET
+        bottom = int(bottom * scale)
+
+        screenshot = ImageGrab.grab(
+            bbox=(left, top, right, bottom)
+        )
+
+        file_name = (
+            f"screenshots/portfolio/"
+            f"fruit_{self.screenshot_counter:02d}.png"
+        )
+
+        screenshot.save(file_name)
+
+        self.screenshot_counter += 1
+
+        print(f"Screenshot guardada: {file_name}")
 
     def on_closing(self):
 
