@@ -1,0 +1,8 @@
+tensorflow
+opencv-python
+numpy
+Pillow
+pyserial
+pywin32
+ultralytics
+pytesseract
