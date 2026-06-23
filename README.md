@@ -10,11 +10,11 @@ Originally developed as part of research activities conducted at UABCS's Artific
 
 ## 🎥 Demo
 
-[![Fruit Detection Demo](https://img.youtube.com/vi/VIDEO_ID/maxresdefault.jpg)](https://youtu.be/VIDEO_ID)
+[![Fruit Detection Demo](https://img.youtube.com/vi/2lSyAGUcsdM/maxresdefault.jpg)](https://youtu.be/2lSyAGUcsdM)
 
-▶️ **[Watch Demo on YouTube](https://youtu.be/VIDEO_ID)**
+▶️ **[Watch Demo on YouTube](https://youtu.be/2lSyAGUcsdM)**
 
-The demonstration showcases the desktop interface, fruit recognition workflow, serial communication features, automated pricing process, and the complete shopping experience offered by the system.
+The demonstration showcases the desktop interface, fruit recognition workflow, weight simulation, automatic pricing process, shopping cart management, and the complete purchasing experience offered by the system.
 
 ---
 
