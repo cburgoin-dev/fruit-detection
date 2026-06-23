@@ -37,5 +37,8 @@ output/
 # Generated exports
 *.xlsx
 
+# Demo videos
+assets/videos
+
 # Screenshots generated automatically
 screenshots/portfolio/
