@@ -53,7 +53,7 @@ The screenshots below showcase the fruit detection system operating under differ
 
 | Multi-Product Session | Price Calculation |
 |---|---|
-| ![](screenshots/fruit-detection-04.png) | ![](screenshots/fruit-detection-05.png) | ![](screenshots/fruit-detection-06.png) |
+| ![](screenshots/fruit-detection-04.png) | ![](screenshots/fruit-detection-05.png)
 
 ---
 
