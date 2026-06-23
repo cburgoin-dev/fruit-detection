@@ -47,12 +47,12 @@ The demonstration showcases the desktop interface, fruit recognition workflow, s
 
 The screenshots below showcase the fruit detection system operating under different scenarios.
 
-| Main Interface | Fruit Recognition | Shopping Cart |
+| Main Interface | Fruit Classification | Shopping Cart |
 |---|---|---|
 | ![](screenshots/fruit-detection-01.png) | ![](screenshots/fruit-detection-02.png) | ![](screenshots/fruit-detection-03.png) |
 
-| Demo Mode | Weight Integration | Final Purchase |
-|---|---|---|
+| Multi-Product Session | Price Calculation |
+|---|---|
 | ![](screenshots/fruit-detection-04.png) | ![](screenshots/fruit-detection-05.png) | ![](screenshots/fruit-detection-06.png) |
 
 ---
